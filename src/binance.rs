@@ -4,13 +4,13 @@ use serde::{Serialize, Deserialize};
  
 #[derive(Serialize, Deserialize, Debug)]
 pub struct BinanceResponse {
-    symbol: String,
-    price: String
+    pub symbol: String,
+    pub price: String
 }
 
 
-pub async fn grab_bitcoin() -> BinanceResponse {
-    let url ="https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT";      // URL used to grab bitcoin data from binance API.
+pub async fn grab_crypto_data(coin: &str) -> BinanceResponse {
+    let url = format!("https://api.binance.com/api/v3/ticker/price?symbol={}USDT", coin);       // URL used to grab data of a given crypto currency from binance API.
 
     let binance_response: BinanceResponse = tokio::task::spawn_blocking(move || {               // Allows rocket to still run without breaking runtime.
         let res: BinanceResponse = reqwest::blocking::get(url).expect("Can't access api")       // Makes request to the API.
