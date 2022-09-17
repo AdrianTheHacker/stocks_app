@@ -40,13 +40,14 @@ None at the moment
 ### Implementation Plan
 ##### Step 1
 1. Working Backend
-2. displaying frontend
 
-##### Step 2
-1. Grab stock data from binance's API
+2. Grab stock data from binance's API
     - May have to use tokio::task::spawn_blocking
 
-2. Display the stock data that has been searched
+3. Display the stock data that has been searched
+
+##### Step 2
+2. Displaying frontend
 
 ##### Step 3 
 1. Show top five most value crypto / Stock
