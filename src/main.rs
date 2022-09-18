@@ -1,4 +1,3 @@
-use binance::grab_crypto_data;
 use yew::prelude::*;
 
 pub mod binance;
