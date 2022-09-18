@@ -1,0 +1,27 @@
+:root {
+    --content-box-width: 400px;
+    --content-box-height: 250px;
+}
+
+#content-box {
+    background-color: #2ecc71;
+    width: var(--content-box-width);
+    height: var(--content-box-height);
+
+    margin-left: calc(50% - calc(var(--content-box-width) / 2));
+    margin-top: 25%;
+
+    border-radius: 5px;
+}
+
+#coin-table {
+    margin-left: 25%;
+}
+
+#coin-price {
+    text-align: right;
+}
+
+h1 {
+    text-align: center;
+}

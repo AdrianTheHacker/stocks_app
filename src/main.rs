@@ -12,7 +12,10 @@ struct CoinListProps {
 #[function_component(CoinList)]
 fn coin_list(CoinListProps { coin_list }: &CoinListProps) -> Html {
     coin_list.iter().map(|coin| html! {
-        <p>{format!("{}: {}", coin.symbol, coin.price)}</p>
+        <tr>
+            <td id="coin-symbol">{ &coin.symbol }</td>
+            <td id="coin-price">{ &coin.price }</td>
+        </tr>
     }).collect()
 }
 
@@ -36,10 +39,18 @@ fn app() -> Html {
     }
 
     html! {
-        <>
-            <h1>{ "Crypto Ship" }</h1>
-            <div>
-                <CoinList coin_list={(*coin_list).clone()}/>
+        <>  
+            <div id="content-box">
+                <h1>{ "Crypto Ship" }</h1>
+                <div id="coin-table">
+                    <table>
+                        <tr>
+                            <th>{ "Coin" }</th>
+                            <th>{ "Value (USDT)" }</th>
+                        </tr>
+                        <CoinList coin_list={(*coin_list).clone()}/>
+                    </table>
+                </div>
             </div>
         </>
     }
