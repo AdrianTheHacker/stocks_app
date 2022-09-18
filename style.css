@@ -3,13 +3,26 @@
     --content-box-height: 250px;
 }
 
-#content-box {
-    background-color: #2ecc71;
+.background {
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 50px;
+
+    width: 100%;
+
+    background-image: url('to_the_moon.jpg');
+
+    border-color:black;
+}
+
+#text-box {
+    position: absolute;
+    background-color:aliceblue;
     width: var(--content-box-width);
     height: var(--content-box-height);
 
     margin-left: calc(50% - calc(var(--content-box-width) / 2));
-    margin-top: 25%;
+    margin-top: 10%;
 
     border-radius: 5px;
 }

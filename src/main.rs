@@ -20,8 +20,8 @@ fn coin_list(CoinListProps { coin_list }: &CoinListProps) -> Html {
 }
 
 
-#[function_component(App)]
-fn app() -> Html {
+#[function_component(CoinTable)]
+fn coin_table() -> Html {
     let coin_list = use_state(|| vec![]);
     {
         let coin_list = coin_list.clone();
@@ -35,23 +35,38 @@ fn app() -> Html {
                     
                 coin_list.set(fetched_coin_list);
             });
-            || ()}, ());
+            || ()
+        }, ());
     }
 
     html! {
-        <>  
-            <div id="content-box">
-                <h1>{ "Crypto Ship" }</h1>
-                <div id="coin-table">
-                    <table>
-                        <tr>
-                            <th>{ "Coin" }</th>
-                            <th>{ "Value (USDT)" }</th>
-                        </tr>
-                        <CoinList coin_list={(*coin_list).clone()}/>
-                    </table>
-                </div>
+        <>
+            <div id="text-box">
+            <h1>{ "Crypto Ship" }</h1>
+            <div id="coin-table">
+                <table>
+                    <tr>
+                        <th>{ "Coin" }</th>
+                        <th>{ "Value (USDT)" }</th>
+                    </tr>
+                    <CoinList coin_list={(*coin_list).clone()}/>
+                </table>
             </div>
+            </div>
+        </>
+    }
+}
+
+
+
+#[function_component(App)]
+fn app() -> Html {
+    
+
+    html! {
+        <>
+            // <img id="background-img" data-trunk="true" src="to_the_moon.jpg" alt="Rocket Background" width="100%"/>
+            <CoinTable/>
         </>
     }
 }
