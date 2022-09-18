@@ -1,25 +1,24 @@
-use reqwest;
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
+use gloo_net::http::Request;
 
- 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct BinanceResponse {
+
+#[derive(Clone, PartialEq, Deserialize, Debug)]
+pub struct CryptoData {
     pub symbol: String,
     pub price: String
 }
 
 
-pub async fn grab_crypto_data(coin: &str) -> BinanceResponse {
-    let url = format!("https://api.binance.com/api/v3/ticker/price?symbol={}USDT", coin);       // URL used to grab data of a given crypto currency from binance API.
+pub async fn grab_crypto_data(coin: String) -> CryptoData {
+    let url: String = format!("https://api.binance.com/api/v3/ticker/price?symbol={}USDT", coin);       // URL to used for making API requests.
 
-    let binance_response: BinanceResponse = tokio::task::spawn_blocking(move || {               // Allows rocket to still run without breaking runtime.
-        let res: BinanceResponse = reqwest::blocking::get(url).expect("Can't access api")       // Makes request to the API.
-                                                              .json()                           // Coverts the data to a JSON format.
-                                                              .unwrap();                        // Allow the data to be written as a BinanceResponse.
-        res
-    }).await.unwrap();
+    let response: CryptoData = Request::get(url.as_str())       // Used to make the HTTP requests.
+                .send()                                         // This works similiar to reqwests::blocking::get.
+                .await
+                .unwrap()
+                .json()
+                .await
+                .unwrap();
 
-    println!("{:?}", &binance_response);        // Prints the data stored in binance_response to the console.
-
-    return binance_response;        // Returns the data as a BinanceResponse.
+    response        // Returns the HTTP request as CryptoData.
 }
