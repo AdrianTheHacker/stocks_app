@@ -26,9 +26,9 @@ fn app() -> Html {
         yew::use_effect_with_deps(move |_| {
             let coin_list = coin_list.clone();
             wasm_bindgen_futures::spawn_local(async move {
-                let fetched_coin_list: Vec<binance::CryptoData> = [binance::grab_crypto_data("BTC".to_string()).await,
-                                                                   binance::grab_crypto_data("ETH".to_string()).await,
-                                                                   binance::grab_crypto_data("DOGE".to_string()).await].to_vec();
+                let fetched_coin_list: Vec<binance::CryptoData> = Vec::from([binance::grab_crypto_data("BTC".to_string()).await,
+                                                                             binance::grab_crypto_data("ETH".to_string()).await,
+                                                                             binance::grab_crypto_data("DOGE".to_string()).await]);
                     
                 coin_list.set(fetched_coin_list);
             });
